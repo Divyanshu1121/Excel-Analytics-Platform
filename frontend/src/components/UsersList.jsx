@@ -30,7 +30,7 @@ const UsersList = () => {
                 },
             });
             toast.success("User promoted successfully");
-            fetchUsers(); // Refresh list
+            fetchUsers();
         } catch (err) {
             alert("Failed to promote user");
         }

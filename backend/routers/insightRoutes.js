@@ -15,13 +15,12 @@ router.post("/insight", authMiddleware, async (req, res) => {
             return res.status(400).json({ msg: "No data provided" });
         }
 
-        // ✨ Mock Insight for local testing
         const summary = `This mock insight describes uploaded Excel data. 
         The file contains structured tabular data, where you can observe patterns such as higher sales in specific months, outliers in pricing, or clustering of categories. 
         This helps users visualize trends and prepare reports. More advanced insights would reveal averages, correlations, and anomalies based on larger datasets. 
         Make sure to replace this with actual OpenAI response in production.`;
 
-        res.json({ summary }); // Simulate OpenAI result
+        res.json({ summary });
     } catch (error) {
         console.error("Insight generation failed:", error);
         res.status(500).json({ msg: "Insight generation failed" });

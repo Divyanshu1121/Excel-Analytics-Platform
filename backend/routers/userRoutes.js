@@ -3,7 +3,6 @@ const router = express.Router();
 const User = require("../models/User");
 const isAdmin = require("../middlewares/isAdmin");
 
-// 🔐 GET all users (admin only)
 router.get("/", isAdmin, async (req, res) => {
     try {
         const users = await User.find().select("-password");
@@ -13,7 +12,6 @@ router.get("/", isAdmin, async (req, res) => {
     }
 });
 
-// 🔁 Promote user to admin
 router.put("/promote/:id", isAdmin, async (req, res) => {
     try {
         await User.findByIdAndUpdate(req.params.id, { role: "admin" });
@@ -23,7 +21,6 @@ router.put("/promote/:id", isAdmin, async (req, res) => {
     }
 });
 
-// ❌ Delete a user
 router.delete("/:id", isAdmin, async (req, res) => {
     try {
         await User.findByIdAndDelete(req.params.id);

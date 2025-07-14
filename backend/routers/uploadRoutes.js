@@ -12,7 +12,6 @@ const UploadHistory = require("../models/UploadHistory");
 const isAdmin = require("../middlewares/isAdmin");
 const authMiddleware = require("../middlewares/authMiddleware");
 
-// ✅ Upload Excel File + Save History
 router.post("/excel", upload.single("file"), async (req, res) => {
     try {
         if (!req.file) return res.status(400).json({ msg: "No file uploaded" });
@@ -25,7 +24,6 @@ router.post("/excel", upload.single("file"), async (req, res) => {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         const userId = decoded.id;
 
-        // Save data in ExcelData
         await ExcelData.create({
             user: userId,
             filename: req.file.originalname,
@@ -33,7 +31,6 @@ router.post("/excel", upload.single("file"), async (req, res) => {
             data: sheetData,
         });
 
-        // ✅ Save history in UploadHistory
         await UploadHistory.create({
             fileName: req.file.originalname,
             user: userId,
@@ -45,7 +42,6 @@ router.post("/excel", upload.single("file"), async (req, res) => {
     }
 });
 
-// ✅ Admin route to view all uploads
 router.get("/admin/all", isAdmin, async (req, res) => {
     try {
         const uploads = await ExcelData.find().populate("user", "name email");
@@ -55,7 +51,6 @@ router.get("/admin/all", isAdmin, async (req, res) => {
     }
 });
 
-// ✅ NEW: Get personal upload history
 router.get("/history", authMiddleware, async (req, res) => {
     try {
         const history = await UploadHistory.find({ user: req.user.id }).sort({ uploadedAt: -1 });

@@ -8,7 +8,7 @@ const ExcelDataSchema = new mongoose.Schema({
     },
     filename: String,
     sheetName: String,
-    data: [Object], // Array of rows from Excel
+    data: [Object],
     uploadedAt: {
         type: Date,
         default: Date.now,

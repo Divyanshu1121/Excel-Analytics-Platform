@@ -10,7 +10,6 @@ import PrivateRoute from "./components/PrivateRoute";
 import Upload from './components/Upload';
 import AdminPanel from './components/AdminPanel';
 import AdminUploads from './components/AdminUploads';
-// import Users from './components/UsersList';
 import UsersList from "./components/UsersList";
 import Stats from "./components/Stats";
 

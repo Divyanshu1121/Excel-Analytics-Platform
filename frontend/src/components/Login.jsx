@@ -6,7 +6,7 @@ export default function Login() {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [role, setRole] = useState("user"); // ✅ default role
+    const [role, setRole] = useState("user");
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -17,7 +17,6 @@ export default function Login() {
             );
             localStorage.setItem("token", res.data.token);
 
-            // ✅ Redirect based on role
             navigate(role === "admin" ? "/admin" : "/dashboard");
         } catch (err) {
             console.error("Login failed:", err.response?.data || err.message);
